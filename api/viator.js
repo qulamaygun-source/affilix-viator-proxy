@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         headers: {
           "Accept": "application/json;version=2.0",
           "exp-api-key": process.env.VIATOR_API_KEY
-          // "Accept-Language" header silindi
+          // !!! Accept-Language header tamamilə silindi !!!
         }
       }
     );
