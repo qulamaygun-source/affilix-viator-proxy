@@ -1,13 +1,12 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "https://api.viator.com/partner/products/search?limit=5&currency=USD", 
+      "https://api.viator.com/partner/products/search?limit=5&currency=USD",
       {
         method: "GET",
         headers: {
           "Accept": "application/json;version=2.0",
           "exp-api-key": process.env.VIATOR_API_KEY
-          // !!! Accept-Language tamamilə silindi !!!
         }
       }
     );
