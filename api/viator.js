@@ -19,24 +19,33 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
           "exp-api-key": process.env.VIATOR_API_KEY
         },
-        body: JSON.stringify({
-          destId,
-          limit,
-          currency
-        })
+        body: JSON.stringify({ destId, limit, currency })
       }
     );
 
+    // 1️⃣ HTTP status yoxlaması
+    if (!response.ok) {
+      let errorData = await response.json().catch(() => ({}));
+      return res.status(response.status).json({
+        error: "Viator API-dən Xarici Xəta",
+        statusCode: response.status,
+        details: errorData.message || response.statusText
+      });
+    }
+
+    // 2️⃣ Cavabı JSON-a çevir
     const data = await response.json();
 
+    // 3️⃣ Viator-un daxilindəki biznes xətalarını yoxla
     if (data.code) {
       return res.status(400).json({ error: data.message, code: data.code });
     }
 
+    // 4️⃣ Uğurlu cavab
     res.status(200).json(data);
 
   } catch (error) {
-    console.error("Viator API Error:", error);
-    res.status(500).json({ error: "Proxy error", details: error.message });
+    console.error("Viator API Xətası (Şəbəkə/JSON Parse):", error);
+    res.status(500).json({ error: "Proxy Xətası", details: error.message });
   }
 }
