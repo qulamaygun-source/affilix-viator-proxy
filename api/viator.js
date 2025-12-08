@@ -5,7 +5,7 @@ export default async function handler(req, res) {
       {
         method: "GET",
         headers: {
-          "Accept": "application/json",
+          "Accept": "application/json;version=3.0"
           "exp-api-key": process.env.VIATOR_API_KEY
         }
       }
