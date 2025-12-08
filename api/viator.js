@@ -1,10 +1,13 @@
-// api/viator-post.js
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST method allowed" });
   }
 
   const { destId, limit = 5, currency = "USD" } = req.body;
+
+  if (!destId) {
+    return res.status(400).json({ error: "destId is required" });
+  }
 
   try {
     const response = await fetch(
