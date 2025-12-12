@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   // 1️⃣ Yalnız POST metodunu qəbul et
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST method allowed" });
-  }
+  } 
 
   // 2️⃣ Sorğu bədənindən məlumatları götür
   const { destId, limit = 5, currency = "USD" } = req.body;
