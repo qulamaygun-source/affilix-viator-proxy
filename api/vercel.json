@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/post",
+      "methods": ["POST"],
+      "dest": "/post.viator.js"
+    },
+    {
+      "src": "/hello",
+      "dest": "/hello.js"
+    }
+  ]
+}
